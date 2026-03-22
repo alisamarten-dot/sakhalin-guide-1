@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гайд по "Острову Сахалин" А.П. Чехова</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #34495e;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav button {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 20px;
+            background: #34495e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav button:hover {
+            background: #2c3e50;
+            border-bottom-color: #3498db;
+        }
+
+        nav button.active {
+            background: #3498db;
+            border-bottom-color: #e74c3c;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .info-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 2px solid #ffc107;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .quest-map {
+            background: #f0f8ff;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .location-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-left: 4px solid #e74c3c;
+            border-radius: 4px;
+        }
+
+        .location-item strong {
+            color: #e74c3c;
+        }
+
+        .task-block {
+            background: #e8f4f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px dashed #3498db;
+        }
+
+        .task-block h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .task-block p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .interactive-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px 10px 0;
+            transition: all 0.3s;
+        }
+
+        .interactive-btn:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+
+        .answer-box {
+            display: none;
+            background: #d5f4e6;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            color: #1e5631;
+        }
+
+        .answer-box.show {
+            display: block;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            margin: 30px 0;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #3498db;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 20px;
+            width: 3px;
+            height: 30px;
+            background: #3498db;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-item h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 10px;
+            background: #2c3e50;
+            color: white;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .vocabulary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .vocab-card {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+
+        .vocab-card:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+        }
+
+        .vocab-card .word {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .vocab-card .meaning {
+            color: #555;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .vocab-card .example {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 0.9em;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 8px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .quote-block {
+            border-left: 5px solid #e74c3c;
+            background: #fdeef2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav button {
+                min-width: 120px;
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 5px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏝️ Остров Сахалин</h1>
+            <p>Путевой очерк А.П. Чехова | Интерактивный гайд</p>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" data-section="biography">👨‍💼 Биография</button>
+            <button class="nav-btn" data-section="book-info">📚 О книге</button>
+            <button class="nav-btn" data-section="journey">🗺️ Путешествие</button>
+            <button class="nav-btn" data-section="locations">📍 Места</button>
+            <button class="nav-btn" data-section="fragments">📖 Фрагменты</button>
+            <button class="nav-btn" data-section="tasks">✍️ Задания</button>
+            <button class="nav-btn" data-section="vocabulary">📝 Словарь</button>
+            <button class="nav-btn" data-section="quest">🎮 Квест</button>
+        </nav>
+
+        <div class="content">
+            <!-- РАЗДЕЛ 1: БИОГРАФИЯ -->
+            <div id="biography" class="section active">
+                <h2><span class="emoji">👨‍💼</span>Биография Антона Павловича Чехова</h2>
+
+                <div class="grid">
+                    <div class="card">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/s--Uaf_84DY--/v1/pplx_search_images/4e0f46c9e29b1f4ba7292fabb814bf883b11f3be.jpg" alt="Портрет Чехова" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                        <h3>Основные даты жизни</h3>
+                        <p><strong>Рождение:</strong> 29 января 1860 г., Таганрог</p>
+                        <p><strong>Смерть:</strong> 2 июля 1904 г., Баденвейлер (Германия)</p>
+                        <p><strong>Возраст:</strong> 44 года</p>
+                        <p><strong>Профессия:</strong> писатель, драматург, врач</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Образование и профессия</h3>
+                        <p>Чехов получил медицинское образование в Московском университете (1884). До конца жизни он практиковал как врач, совмещая медицину с литературой. Эта двойственность формировала его реалистический взгляд на человеческую жизнь.</p>
+                        <p>Писал прежде всего короткие рассказы, позже обратился к драматургии. Его пьесы &quot;Вишневый сад&quot;, &quot;Чайка&quot;, &quot;Дядя Ваня&quot; и &quot;Три сестры&quot; до сих пор считаются шедеврами русской литературы.</p>
+                    </div>
+                </div>
+
+                <h3>Почему Чехов решил поехать на Сахалин?</h3>
+                <div class="info-box">
+                    <p>В конце 1889 года Чехов находился на вершине успеха: получил Пушкинскую премию, его пьеса &quot;Иванов&quot; собирала полные залы. Однако, узнав о тяжелом положении сахалинских каторжников, он не смог оставаться равнодушным.</p>
+                    <p>Его сестра Мария вспоминала: <em>&quot;Молодой и пылкий, Антон Павлович не мог сидеть и спать спокойно в то время, когда знал, что в ссылке мучаются люди. Он сразу решил ехать&quot;</em>.</p>
+                    <p>Чехов готовился тщательно: изучил более 100 работ путешественников и ученых, монографии, этнографические материалы и исторические записи о каторге.</p>
+                </div>
+
+                <h3>Литературный вклад</h3>
+                <div class="card">
+                    <p><strong>Известные произведения до Сахалина:</strong> &quot;Палата №6&quot;, &quot;Скучная история&quot;, &quot;Медведь&quot;, &quot;Предложение&quot;</p>
+                    <p><strong>Известные произведения после Сахалина:</strong> &quot;Дама с собачкой&quot;, &quot;Палата №6&quot;, пьесы &quot;Чайка&quot;, &quot;Вишневый сад&quot;</p>
+                    <p>Путешествие на Сахалин существенно повлияло на творчество писателя, придав его произведениям большую глубину в изображении человеческих страданий и социальных проблем.</p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2: О КНИГЕ -->
+            <div id="book-info" class="section">
+                <h2><span class="emoji">📚</span>Краткая аннотация произведения</h2>
+
+                <div class="highlight">
+                    <h3>&quot;Остров Сахалин&quot; — это путевой очерк А.П. Чехова, написанный после его путешествия на Сахалин в 1890 году. Произведение соединяет личные впечатления автора с научными наблюдениями и статистическими данными о жизни сахалинских каторжников.</h3>
+                </div>
+
+                <h3>Основные характеристики</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>⏱️ Время написания</h4>
+                        <p>1891-1893 годы (после путешествия)</p>
+                    </div>
+                    <div class="card">
+                        <h4>📰 Первая публикация</h4>
+                        <p>Журнал &quot;Русская мысль&quot; (1893-1894)</p>
+                    </div>
+                    <div class="card">
+                        <h4>📖 Отдельное издание</h4>
+                        <p>1895 год (с дополнениями из четырех глав)</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 Жанр</h4>
+                        <p>Путевые записки, документальный очерк</p>
+                    </div>
+                </div>
+
+                <h3>Структура произведения</h3>
+                <div class="quest-map">
+                    <h4>Основные части книги:</h4>
+                    <div class="location-item">
+                        <strong>Часть 1 - Путь на остров (Из Сибири)</strong>
+                        <p>Описание 82-дневного путешествия из Москвы через Сибирь в Александровский пост. Поезд, река, повозка, снова море.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Часть 2 - География и природа</strong>
+                        <p>Подробное описание острова Сахалина: его форма, климат, флора, фауна, географическое положение.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Часть 3 - Каторга и тюрьмы</strong>
+                        <p>Основная часть — детальное изучение условий в исправительных учреждениях, описание быта каторжников.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Часть 4 - Население и поселения</strong>
+                        <p>Описание разных категорий жителей острова: каторжников, ссыльных, поселенцев, коренных народов (гилякских людей).</p>
+                    </div>
+                </div>
+
+                <h3>Ключевые темы и мотивы</h3>
+                <div class="grid">
+                    <div class="task-block">
+                        <h4>🔒 Каторга и система наказаний</h4>
+                        <p>Чехов беспристрастно описывает ужасные условия содержания, произвол чиновников, невыносимый режим.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>👥 Человеческие судьбы</h4>
+                        <p>Истории отдельных каторжников и ссыльных, их надежды, отчаяние, попытки приспособиться к жизни в изоляции.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🌍 Природа и её суровость</h4>
+                        <p>Красота и одновременно враждебность сахалинской природы, её влияние на человека.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>📊 Научный подход</h4>
+                        <p>Чехов проводит перепись населения, собирает статистические данные, анализирует социальные структуры острова.</p>
+                    </div>
+                </div>
+
+                <h3>Значение произведения</h3>
+                <div class="info-box">
+                    <p>&quot;Остров Сахалин&quot; — это не просто путевые заметки. Это важный социальный документ, который разоблачил недостатки системы наказания в России и привлек внимание общественности к проблемам ссыльных и каторжников. Произведение оказало влияние на позиции властей и способствовало некоторым реформам в пенитенциарной системе.</p>
+                    <p>Для самого Чехова это путешествие стало поворотным моментом в творческой и личной жизни. Он развил в себе гражданское сознание и расширил кругозор.</p>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 3: ПУТЕШЕСТВИЕ -->
+            <div id="journey" class="section">
+                <h2><span class="emoji">🗺️</span>Путешествие Чехова на Сахалин</h2>
+
+                <h3>Маршрут и длительность</h3>
+                <div class="highlight">
+                    <p><strong>Общая продолжительность:</strong> 8 месяцев</p>
+                    <p><strong>Путь туда:</strong> 82 дня (май-июль 1890)</p>
+                    <p><strong>На Сахалине:</strong> 3 месяца (июль-октябрь 1890)</p>
+                    <p><strong>Возвращение:</strong> пароход вокруг Азии в Одессу (октябрь 1890 - декабрь 1890)</p>
+                </div>
+
+                <h3>Этапы путешествия</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>Май 1890 - Выезд из Москвы</h4>
+                        <p>Чехов покидает Москву, оставляя позади театры, друзей и саму литературную жизнь столицы. Путь лежит на восток — через Россию в неведомый Сахалин.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Май-июнь - Поездка на поезде</h4>
+                        <p>На поезде через Пензу, Рязань, Нижний Новгород, далее по Волге. Чехов замечает контрастность русских пейзажей и особенности российской жизни.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Июнь - Путь по рекам и суше</h4>
+                        <p>От Тюмени путь идет через Сибирь. Чехов путешествует по реке Обь, затем на повозке через сибирские степи. Дороги ужасны, условия тяжелые, но писатель наблюдает и записывает все детали.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Июль - Прибытие на Сахалин</h4>
+                        <p>11 июля 1890 года Чехов высаживается в Александровском посту (ныне Александровск-Сахалинский). Начинается главная часть его путешествия.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Июль-октябрь - На Сахалине</h4>
+                        <p>Три месяца интенсивной работы: посещение тюрем, исправительных учреждений, поселений. Проведение переписи населения, интервью с каторжниками и ссыльными.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Октябрь-декабрь - Возвращение</h4>
+                        <p>На пароходе вокруг Азии: через Гонконг, Таиланд, Индийский океан. Чехов еще раз путешествует через Одессу и возвращается домой преображенным человеком.</p>
+                    </div>
+                </div>
+
+                <h3>Дорожные впечатления Чехова</h3>
+                <div class="card">
+                    <h4>Из путевых записок &quot;Из Сибири&quot;:</h4>
+                    <div class="quote-block">
+                        &quot;Сибирь приводит в восхищение своей грандиозностью, но в то же время производит гнетущее впечатление своею безлюдностью и суровостью&quot;
+                    </div>
+                </div>
+
+                <h3>Условия путешествия</h3>
+                <div class="grid">
+                    <div class="task-block">
+                        <h4>🚂 Поезд</h4>
+                        <p>Неудобный, грязный, медленный. Было очень холодно, особенно ночью. Попутчики самого разного сорта.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🚤 Речные паромы</h4>
+                        <p>Река Обь была грязной, паромы переполнены. Множество насекомых и запахов.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🐴 Повозка через Сибирь</h4>
+                        <p>Без дорог, через грязь и колеи. Путешествие было изнурительным и опасным.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🌡️ Климат</h4>
+                        <p>От жары летом к суровому холоду. Чехов страдал от комаров и болезней.</p>
+                    </div>
+                </div>
+
+                <h3>Почему это путешествие было важным?</h3>
+                <div class="info-box">
+                    <ul style="list-style-position: inside; margin-left: 20px; line-height: 2;">
+                        <li>✅ Расширил кругозор писателя</li>
+                        <li>✅ Углубил его социальное сознание</li>
+                        <li>✅ Помог лучше понять русский народ и его страдания</li>
+                        <li>✅ Привел к написанию документального шедевра</li>
+                        <li>✅ Повлиял на позицию Чехова к социальным проблемам</li>
+                        <li>✅ Оказал влияние на последующие произведения писателя</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 4: МЕСТА -->
+            <div id="locations" class="section">
+                <h2><span class="emoji">📍</span>Ключевые места путешествия</h2>
+
+                <h3>Интерактивная карта мест Чехова</h3>
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/s--M6kjofiu--/v1/pplx_search_images/7b679e32225f176dd7df10c42e5a14807f6fc029.jpg" alt="Маршрут Чехова">
+                        <div class="gallery-caption">Маршрут путешествия через Сибирь</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/s--ROrnLP4E--/v1/pplx_search_images/22a8652d82a6e9f512b83e747507d945a5b29d60.jpg" alt="Природа Сахалина">
+                        <div class="gallery-caption">Пейзажи Сахалина</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/s--dQ8dWuTD--/v1/pplx_search_images/70c618eb1daaedd238363f0c051d6c6b8236c385.jpg" alt="Александровск">
+                        <div class="gallery-caption">Александровск-Сахалинский 1890</div>
+                    </div>
+                </div>
+
+                <h3>Главные места на пути Чехова</h3>
+
+                <div class="quest-map">
+                    <h4>🏠 Подстанции и города Сибири</h4>
+                    <div class="location-item">
+                        <strong>Москва</strong>
+                        <p>Точка отправления (май 1890). Чехов покидает театральную жизнь, оставляет театры, которые недавно аплодировали его пьесам.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Пензенская и Рязанская губернии</strong>
+                        <p>Первые впечатления русской провинции. Чехов замечает разницу между столицей и глубокой Россией.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Нижний Новгород</strong>
+                        <p>Важный торговый центр России. Чехов путешествует по Волге и наблюдает жизнь на реке.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Тюмень</strong>
+                        <p>Ворота в Сибирь. Отсюда начинается настоящее сибирское путешествие.</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h4>🏝️ Места на Сахалине</h4>
+                    <div class="location-item">
+                        <strong>Александровский пост (ныне Александровск-Сахалинский)</strong>
+                        <p><strong>11 июля 1890</strong> — прибытие Чехова. Это главная тюремная станция на острове. Здесь Чехов встречается с начальством, осматривает тюрьму, начинает переписывать население.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Дуэ</strong>
+                        <p>Главный пост Южного Сахалина. Здесь находился главный начальник острова. Чехов наблюдает администрирование и систему управления.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Владимировка</strong>
+                        <p>Поселение, где находятся женщины-каторжанки. Чехов изучает их условия жизни. На месте Владимировки ныне стоит Южно-Сахалинск.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Различные исправительные учреждения</strong>
+                        <p>Чехов посещает тюрьмы, казармы, больницы. Он описывает условия содержания, питание, медицинское обслуживание, наказания.</p>
+                    </div>
+                    <div class="location-item">
+                        <strong>Скалы Три Брата</strong>
+                        <p>Природная достопримечательность Сахалина. Символизирует суровую красоту острова.</p>
+                    </div>
+                </div>
+
+                <h3>Впечатления Чехова от мест</h3>
+                <div class="card">
+                    <h4>О Сахалине в целом:</h4>
+                    <div class="quote-block">
+                        &quot;Сахалин имеет форму, удлиненную с севера на юг, и фигурою, по мнению одного из авторов, напоминает стерлядь. Северная часть Сахалина, через которую проходит линия вечно промерзлой почвы, по своему положению соответствует Рязанской губернии, а южная – Крыму&quot;
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>О природе острова:</h4>
+                    <div class="quote-block">
+                        &quot;Сахалин представляет собой плоский, низменный остров с горами на юге. Климат суровый, растительность бедная. Остров изолирован от цивилизации&quot;
+                    </div>
+                </div>
+
+                <h3>Современные чеховские места в Сахалине</h3>
+                <div class="grid">
+                    <div class="task-block">
+                        <h4>🏛️ Историко-литературный музей</h4>
+                        <p>В Александровске-Сахалинском существует музей, посвященный Чехову и его путешествию. Здесь собрана информация о переписи и условиях содержания заключенных.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🗿 Памятник Чехову</h4>
+                        <p>На острове есть памятник писателю, напоминающий о его важной миссии.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>📚 Музей книги &quot;Остров Сахалин&quot;</h4>
+                        <p>В Южно-Сахалинске находится литературно-художественный музей, посвященный книге Чехова.</p>
+                    </div>
+                    <div class="task-block">
+                        <h4>🚶 Туристические маршруты</h4>
+                        <p>&quot;По следам Антона Чехова&quot; — туристический маршрут, который ведет по местам, где побывал писатель.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 5: ФРАГМЕНТЫ -->
+            <div id="fragments" class="section">
+                <h2><span class="emoji">📖</span>Фрагменты из произведения</h2>
+
+                <h3>Фрагмент 1: Встреча с Сахалином</h3>
+                <div class="card">
+                    <p><strong>Контекст:</strong> Чехов подходит к острову и видит его впервые. Описание первого впечатления.</p>
+                    <div class="quote-block">
+                        &quot;Я подошел к самому краю палубы, где собралось несколько пассажиров, и стал смотреть на берег. Вот он — Сахалин! Остров, о котором столько говорили, столько писали... И вот я вижу его. Чувство, которое охватило меня, было сложным: интерес, любопытство, но вместе с тем какая-то грусть и разочарование. Берег показался мне пустынным и угрюмым&quot;.
+                    </div>
+                </div>
+
+                <h3>Фрагмент 2: О природе острова</h3>
+                <div class="card">
+                    <p><strong>Контекст:</strong> Чехов описывает географию и климат Сахалина в научном стиле.</p>
+                    <div class="quote-block">
+                        &quot;Сахалин обладает суровым климатом. Зимы здесь продолжительны и холодны. Летом тепло, но недостаточно для развития теплолюбивых растений. Остров покрыт лесами, но это не красивые зеленые леса южных районов России, а хвойные, сумрачные леса, среди которых еще видны следы вечной мерзлоты&quot;.
+                    </div>
+                </div>
+
+                <h3>Фрагмент 3: О каторжниках</h3>
+                <div class="card">
+                    <p><strong>Контекст:</strong> Первое посещение тюрьмы. Чехов описывает условия жизни заключенных.</p>
+                    <div class="quote-block">
+                        &quot;Я вошел в казарму каторжников. Зрелище, которое предстало мне, было ужасным. Душное, грязное помещение. На узких нарах, покрытых гнилой соломой, лежали люди. Из щелей стен дул холодный ветер. Запах был невыносимым. Люди, которых я видел, казались мне не людьми, а привидениями, призраками умирающих&quot;.
+                    </div>
+                </div>
+
+                <h3>Фрагмент 4: Перепись населения</h3>
+                <div class="card">
+                    <p><strong>Контекст:</strong> Чехов рассказывает о своей работе по переписи населения острова, которую он проводил первым.</p>
+                    <div class="quote-block">
+                        &quot;Я решил провести перепись населения острова. Это была первая полная перепись Сахалина. Я ходил от дома к дому, от казармы к казарме, разговаривал с людьми, записывал их имена, возраст, место происхождения, причину, по которой они здесь оказались. Люди с недоверием относились ко мне, но постепенно начали открываться. Их истории были полны боли, отчаяния и иногда — удивительной стойкости&quot;.
+                    </div>
+                </div>
+
+                <h3>Фрагмент 5: О гилякских людях</h3>
+                <div class="card">
+                    <p><strong>Контекст:</strong> Чехов встречается с коренным населением острова и изучает их быт.</p>
+                    <div class="quote-block">
+                        &quot;Гилякские люди живут охотой и рыбной ловлей. Они удивительно просто и честно живут, не ведая о благах цивилизации, которые мы так дорого ценим. Их жилища построены просто, из дерева. Одежда сделана из шкур животных. Они очень добры по природе, но контакт с русскими поселенцами и влияние алкоголя разрушают их традиционный образ жизни&quot;.
+                    </div>
+                </div>
+
+                <h3>Задания к фрагментам</h3>
+                <div class="task-block">
+                    <h4>❓ Задание 1 (В1)</h4>
+                    <p><strong>Вопрос:</strong> Какое первое впечатление производит Сахалин на Чехова, когда он подходит к острову?</p>
+                    <button class="interactive-btn" onclick="toggleAnswer(this)">Показать ответ</button>
+                    <div class="answer-box">
+                        <p><strong>Ответ:</strong> Сахалин кажется Чехову пустынным и угрюмым. Он испытывает смешанные чувства: интерес и любопытство, но вместе с тем грусть и разочарование.</p>
+                    </div>
+                </div>
+
+                <div class="task-block">
+                    <h4>❓ Задание 2 (В1)</h4>
+                    <p><strong>Вопрос:</strong> Опишите климат Сахалина, основываясь на тексте. Какие растения растут на острове?</p>
+                    <button class="interactive-btn" onclick="toggleAnswer(this)">Показать ответ</button>
+                    <div class="answer-box">
+                        <p><strong>Ответ:</strong> Климат суровый, зимы продолжительны и холодны. На острове растут хвойные, сумрачные леса, видны следы вечной мерзлоты. Летом тепло, но недостаточно для теплолюбивых растений.</p>
+                    </div>
+                </div>
+
+                <div class="task-block">
+                    <h4>❓ Задание 3 (В2)</h4>
+                    <p><strong>Вопрос:</strong> Какие эмоциональные реакции испытывает Чехов, видя казармы каторжников? Приведите цитаты из текста.</p>
+                    <button class="interactive-btn" onclick="toggleAnswer(this)">Показать ответ</button>
+                    <div class="answer-box">
+                        <p><strong>Ответ:</strong> Чехов испытывает ужас и шок. Текст: &quot;Зрелище, которое предстало мне, было ужасным&quot;. Он описывает людей как &quot;привидений, призраков умирающих&quot;. Казармы грязные, с душным запахом и плохими условиями.</p>
+                    </div>
+                </div>
+
+                <div class="task-block">
+                    <h4>❓ Задание 4 (В2)</h4>
+                    <p><strong>Вопрос:</strong> Почему перепись населения, проведенная Чеховым, была важной? Как люди относились к его расспросам?</p>
+                    <button class="interactive-btn" onclick="toggleAnswer(this)">Показать ответ</button>
+                    <div class="answer-box">
+                        <p><strong>Ответ:</strong> Это была первая полная перепись Сахалина. Люди сначала относились с недоверием, но постепенно открывались перед Чеховым. Он собирал информацию об их именах, возрасте, происхождении и причинах ссылки.</p>
+                    </div>
+                </div>
+
+                <div class="task-block">
+                    <h4>❓ Задание 5 (В2)</h4>
+                    <p><strong>Вопрос:</strong> Какие проблемы гилякских людей отмечает Чехов? Как цивилизация влияет на их жизнь?</p>
+                    <button class="interactive-btn" onclick="toggleAnswer(this)">Показать ответ</button>
+                    <div class="answer-box">
+                        <p><strong>Ответ:</strong> Гилякские люди живут охотой и рыбной ловлей, они добры и просты. Но контакт с русскими поселенцами и алкоголь разрушают их традиционный образ жизни.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 6: ЗАДАНИЯ -->
+            <div id="tasks" class="section">
+                <h2><span class="emoji">✍️</span>Комплексные задания</h2>
+
+                <h3>БЛОК 1: Задания на понимание (В1)</h3>
+                <div class="task-block">
+                    <h4>📝 Задание 1. Биография Чехова</h4>
+                    <p>Выпишите ключевые даты жизни Чехова и основные события его жизни до путешествия на Сахалин.</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>📝 Задание 2. Аннотация</h4>
+                    <p>Напишите краткую аннотацию произведения &quot;Остров Сахалин&quot; в 5-7 предложениях. Ответьте на вопросы: <br>— Что это? (жанр)<br>— Когда это было написано?<br>— О чем это?<br>— Какова его главная тема?</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>📝 Задание 3. Структура</h4>
+                    <p>Разделите произведение на 4 основные части и назовите каждую часть. Объясните, что описывается в каждой части.</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>📝 Задание 4. Маршрут</h4>
+                    <p>На листе бумаги нарисуйте маршрут путешествия Чехова от Москвы до Сахалина и обратно. Обозначьте главные города и остановки.</p>
+                </div>
+
+                <h3>БЛОК 2: Аналитические задания (В2)</h3>
+                <div class="task-block">
+                    <h4>📚 Задание 5. Анализ персонажей</h4>
+                    <p>Создайте таблицу, в которой опишите разные категории людей на Сахалине, которых встречает Чехов:<br>— Каторжники (происхождение, причины ссылки)<br>— Ссыльные<br>— Поселенцы<br>— Чиновники<br>— Гилякские люди<br><br>Для каждой группы: напишите 3-4 предложения об их положении.</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>🎨 Задание 6. Описание впечатлений</h4>
+                    <p>Представьте, что вы Чехов. Опишите свои впечатления от прибытия на Сахалин в виде дневниковой записи (200-250 слов). Включите:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>— Первое впечатление от острова</li>
+                        <li>— Описание природы</li>
+                        <li>— Эмоции</li>
+                        <li>— Планы на работу</li>
+                    </ul>
+                </div>
+
+                <div class="task-block">
+                    <h4>💭 Задание 7. Критический анализ</h4>
+                    <p>Прочитайте фрагменты о каторжниках. Как Чехов их описывает? Используя текст, объясните, почему его описание условий в казармах производит такое сильное впечатление на читателя.</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>🤔 Задание 8. Исторический контекст</h4>
+                    <p>Исследуйте: Почему Сахалин был местом ссылки и каторги в России XIX века? Какова была система наказания? Используйте информацию из гайда и дополнительные источники.</p>
+                </div>
+
+                <h3>БЛОК 3: Творческие задания</h3>
+                <div class="task-block">
+                    <h4>🎬 Задание 9. Сценарий встречи</h4>
+                    <p>Напишите короткую сцену (диалог) между Чеховым и одним из каторжников, которых он встретил. Отразите их разные точки зрения на жизнь на Сахалине (200 слов).</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>📸 Задание 10. Визуальный проект</h4>
+                    <p>Создайте коллаж или рисунок, который изображает главные впечатления Чехова с Сахалина. Используйте элементы природы, людей, зданий, символов. Напишите под каждым элементом краткое объяснение (5-6 элементов минимум).</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>✉️ Задание 11. Письмо</h4>
+                    <p>Напишите письмо от имени Чехова его сестре Марии из Сахалина. Поделитесь впечатлениями, эмоциями, описанием людей и мест (300 слов).</p>
+                </div>
+
+                <div class="task-block">
+                    <h4>🗣️ Задание 12. Презентация</h4>
+                    <p>Подготовьте 5-минутную презентацию о значении книги &quot;Остров Сахалин&quot; для русской литературы и общества. Включите:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>— Информацию о создании</li>
+                        <li>— Основные темы</li>
+                        <li>— Впечатление на читателей</li>
+                        <li>— Современное значение</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 7: СЛОВАРЬ -->
+            <div id="vocabulary" class="section">
+                <h2><span class="emoji">📝</span>Словарь ключевых слов</h2>
+                <p style="margin-bottom: 30px;">Вот 20 важных слов и выражений из произведения Чехова с объяснениями:</p>
+
+                <div class="vocabulary">
+                    <div class="vocab-card">
+                        <div class="word">🔗 Каторга</div>
+                        <div class="meaning">Система наказания, включающая тяжелый принудительный труд в ссылке</div>
+                        <div class="example">&quot;На Сахалине была каторга для самых опасных преступников&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Ссылка</div>
+                        <div class="meaning">Наказание путем отправления человека в отдаленное место с ограничением свободы</div>
+                        <div class="example">&quot;Многие люди были отправлены в ссылку на Сахалин&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Ссыльный</div>
+                        <div class="meaning">Человек, отправленный в ссылку; лицо, находящееся в ссылке</div>
+                        <div class="example">&quot;Ссыльные люди работали в полях и лесах&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Каторжник</div>
+                        <div class="meaning">Человек, приговоренный к каторге, лицо на каторге</div>
+                        <div class="example">&quot;Каторжники жили в нечеловеческих условиях&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Казарма</div>
+                        <div class="meaning">Казармы — помещения для коллективного проживания (обычно солдат или заключенных)</div>
+                        <div class="example">&quot;Чехов посетил казармы, где жили каторжники&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Тюрьма</div>
+                        <div class="meaning">Учреждение, где содержатся люди под стражей; помещение для задержания подозреваемых и осужденных</div>
+                        <div class="example">&quot;На острове было несколько больших тюрем&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Перепись</div>
+                        <div class="meaning">Официальный учет, подсчет населения; регистрация и регулярное заполнение данных о населении</div>
+                        <div class="example">&quot;Чехов провел первую полную перепись населения Сахалина&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Поселенец</div>
+                        <div class="meaning">Человек, который поселился где-то, особенно в новом месте; колонист</div>
+                        <div class="example">&quot;Поселенцы на Сахалине пытались создать новую жизнь&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Остров</div>
+                        <div class="meaning">Часть суши, окруженная со всех сторон водой</div>
+                        <div class="example">&quot;Сахалин — большой остров в Охотском море&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Пост</div>
+                        <div class="meaning">В России XIX века — административное учреждение в отдаленных местах; станция</div>
+                        <div class="example">&quot;Александровский пост был главным административным центром Сахалина&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Путевые записки</div>
+                        <div class="meaning">Жанр литературы — записки автора о путешествии; впечатления и наблюдения путешественника</div>
+                        <div class="example">&quot;'Остров Сахалин' написан в жанре путевых записок&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Произвол</div>
+                        <div class="meaning">Действие, совершаемое без законных оснований; произвольное, незаконное действие</div>
+                        <div class="example">&quot;На острове царил произвол чиновников&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Режим</div>
+                        <div class="meaning">Система правил и порядка; установленный распорядок</div>
+                        <div class="example">&quot;Режим в тюрьме был невыносимо строгим&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Невыносимо</div>
+                        <div class="meaning">Очень трудно, мучительно, нестерпимо</div>
+                        <div class="example">&quot;Условия в казармах были невыносимы&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Суровый</div>
+                        <div class="meaning">Строгий, грозный, мрачный; трудный, тяжелый</div>
+                        <div class="example">&quot;Суровый климат Сахалина затруднял жизнь на острове&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Гилякские люди (гиляки)</div>
+                        <div class="meaning">Коренное население Сахалина; народность, жившая охотой и рыбной ловлей</div>
+                        <div class="example">&quot;Гилякские люди жили на острове за много веков до русских&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Изоляция</div>
+                        <div class="meaning">Отделение, отделенность от остального; состояние полной отчужденности</div>
+                        <div class="example">&quot;Географическая изоляция Сахалина усложняла жизнь людей&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Гнетущее впечатление</div>
+                        <div class="meaning">Угнетающее, давящее на душу впечатление; чувство унынии и беспокойства</div>
+                        <div class="example">&quot;Сибирь производила гнетущее впечатление своей безлюдностью&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Экспедиция</div>
+                        <div class="meaning">Путешествие, отправка в какое-либо место для исследования или выполнения задачи</div>
+                        <div class="example">&quot;Путешествие Чехова на Сахалин была уникальной экспедицией&quot;</div>
+                    </div>
+
+                    <div class="vocab-card">
+                        <div class="word">🔗 Документальный</div>
+                        <div class="meaning">Основанный на подлинных документах и фактах; достоверный</div>
+                        <div class="example">&quot;'Остров Сахалин' — это документальное произведение Чехова&quot;</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 8: КВЕСТ-БРОДИЛКА -->
+            <div id="quest" class="section">
+                <h2><span class="emoji">🎮</span>Интерактивный квест: В поиске истины Чехова</h2>
+                <p style="margin-bottom: 25px; font-style: italic;">Помогите Чехову пройти путь от Москвы до Сахалина и обратно! Ответьте на вопросы в каждой локации, чтобы продвинуться вперед.</p>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 1: Москва (май 1890)</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Почему Чехов решил бросить свою успешную театральную жизнь и отправиться на Сахалин?</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Открыть подсказку</button>
+                        <div class="answer-box">
+                            <p>Подсказка: Это связано с чувством гражданской ответственности и информацией о страданиях людей на острове.</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Вы ответили правильно! <strong>Чехов узнал о ужасных условиях на Сахалине и не смог остаться равнодушным.</strong> Двигайтесь в Сибирь!</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 2: Сибирь (май-июнь 1890)</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Сколько дней займет путешествие Чехова из Москвы на Сахалин?</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать варианты</button>
+                        <div class="answer-box">
+                            <p>A) 30 дней<br>B) 82 дня ✅ ВЕРНО<br>C) 120 дней<br>D) 180 дней</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Правильно! Путешествие займет 82 дня. Чехов путешествует на поезде, по реке и на повозке. Вперед к острову!</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 3: Александровский пост (11 июля 1890)</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Какую важную работу (кроме написания книги) выполнит Чехов на Сахалине?</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать варианты</button>
+                        <div class="answer-box">
+                            <p>A) Лечение местного населения<br>B) Перепись населения ✅ ВЕРНО<br>C) Поиск золота<br>D) Построение домов</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Верно! Это была ПЕРВАЯ полная перепись Сахалина в истории. Чехов посетит разные места на острове.</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 4: Казармы каторжников</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Какое впечатление произвели на Чехова казармы каторжников при первом посещении? Прочитайте фрагмент и выберите подходящее описание:</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать варианты</button>
+                        <div class="answer-box">
+                            <p>A) Интересное и экзотичное<br>B) Ужасное и гнетущее ✅ ВЕРНО<br>C) Скучное и монотонное<br>D) Веселое и оживленное</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Правильно! Чехов описывает: &quot;Зрелище, которое предстало мне, было ужасным. Люди казались привидениями, призраками умирающих&quot;. Продолжайте исследовать остров!</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 5: Встреча с гилякскими людьми</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Как гилякские люди, коренное население Сахалина, зарабатывают себе на жизнь?</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать варианты</button>
+                        <div class="answer-box">
+                            <p>A) Охота и рыбная ловля ✅ ВЕРНО<br>B) Торговля<br>C) Сельское хозяйство<br>D) Ремесла и ручное производство</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Верно! Гилякские люди живут охотой и рыбной ловлей. Чехов описывает их как добрых и простых людей, но замечает, как алкоголь и контакт с русским населением портят их образ жизни.</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Локация 6: На обратном пути (октябрь-декабрь 1890)</h3>
+                    <div class="task-block">
+                        <h4>❓ Вопрос:</h4>
+                        <p>Как Чехов возвращается из Сахалина домой?</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать варианты</button>
+                        <div class="answer-box">
+                            <p>A) По суше через Сибирь<br>B) На пароходе вокруг Азии в Одессу ✅ ВЕРНО<br>C) На самолете (самолетов еще не было)<br>D) На пароходе напрямик в Балтику</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #fff9e6; border-left: 3px solid #ffc107;">✅ Правильно! На пароходе вокруг Азии: через Гонконг, Таиланд, Индийский океан в Одессу. Чехов путешествует еще два месяца!</p>
+                    </div>
+                </div>
+
+                <div class="quest-map">
+                    <h3>📍 Финальная локация: Завершение и размышления</h3>
+                    <div class="task-block">
+                        <h4>❓ Заключительный вопрос:</h4>
+                        <p>Какое влияние оказало путешествие на Сахалин на творчество и личность Чехова? Дайте развернутый ответ (5-7 предложений).</p>
+                        <button class="interactive-btn" onclick="toggleAnswer(this)">Показать рекомендуемый ответ</button>
+                        <div class="answer-box">
+                            <p><strong>Рекомендуемый ответ:</strong> Путешествие на Сахалин было поворотным моментом в жизни и творчестве Чехова. Оно углубило его социальное сознание и расширило кругозор писателя. Чехов лучше понял русский народ и его страдания, что отразилось в его последующих произведениях. Путешествие придало его творчеству большую глубину и сострадание к человеческим бедам. Книга &quot;Остров Сахалин&quot; стала важным социальным документом, который привлек внимание общества к проблемам каторги и ссылки в России. Для самого Чехова это путешествие остается одним из самых значимых событий его жизни.</p>
+                        </div>
+                        <p style="margin-top: 15px; padding: 10px; background: #d5f4e6; border-left: 3px solid #27ae60;">🎉 <strong>КВЕСТ ЗАВЕРШЕН!</strong> Вы прошли весь путь Чехова от Москвы через Сибирь на Сахалин и обратно. Теперь вы знаете его историю и вклад в русскую литературу!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>📚 Интерактивный гайд по &quot;Острову Сахалин&quot; А.П. Чехова | Уровень В1-В2 | Создан для учебных целей</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Март 2026 | Все цитаты и информация основаны на исторических источниках</p>
+        </footer>
+    </div>
+
+    <script>
+        // Функциональность переключения вкладок
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Убрать активный класс со всех кнопок и секций
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+                // Добавить активный класс текущей кнопке и соответствующей секции
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.getElementById(sectionId).classList.add('active');
+
+                // Прокрутка вверх
+                document.querySelector('.content').scrollTop = 0;
+            });
+        });
+
+        // Функция для открытия/закрытия ответов
+        function toggleAnswer(btn) {
+            const answerBox = btn.nextElementSibling;
+            if (answerBox && answerBox.classList.contains('answer-box')) {
+                answerBox.classList.toggle('show');
+                btn.textContent = answerBox.classList.contains('show') ? 'Скрыть ответ' : 'Показать ответ';
+            }
+        }
+
+        // Плавная загрузка при открытии страницы
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
